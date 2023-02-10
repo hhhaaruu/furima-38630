@@ -17,7 +17,7 @@
 ###アソシエーション
 - has_many :items
 - has_many :addresses
-
+- has_many :buys
 ##itemsテーブル
 
 | Column                     | Type       | Option                                  |
@@ -41,6 +41,7 @@
 - belongs_to :shipping-fee-status
 - belongs_to :prefecture
 - belongs_to :schedule-delivery 
+- has_one :buy
 
 ##addressesテーブル
 
@@ -59,3 +60,13 @@
 - belongs_to :user
 - belongs_to :item
 - belongs_to :prefecture
+
+##buysテーブル
+| Colum             | Type       | Option                                   |
+| ----------------- | ---------- | ---------------------------------------- |
+| user_id           | references | null: false, foreign_key: true           |
+| item_id           | references | null: false, foreign_key: true           |
+
+###アソシエーション
+- belongs_to :user
+- belongs_to :item
