@@ -25,25 +25,30 @@
 | item-image                 | string     | null: false                             |
 | item-name                  | text       | null: false                             |
 | item-info                  | text       | null: false                             |
-| item-category              |  | null: false          |
-| item-sales-status          |  | null: false          |
-| item-shipping-fee-status   |  | null: false          |
-| item-prefecture            |  | null: false          |
-| item-scheduled-delivery    |  | null: false          |
+| category-id                | integer    | null: false                             |
+| sales-status-id            | integer    | null: false                             |
+| shipping-fee-status-id     | integer    | null: false                             |
+| prefecture-id              | integer    | null: false                             |
+| scheduled-delivery-id      | integer    | null: false                             |
 | item-price                 | integer    | null: false                             |
 | user_id                    | references | null: false, foreign_key: true          |
 
 ###アソシエーション
 - belongs_to :user
-- has_one: address
+- has_one :address
+- belongs_to :category
+- belongs_to :sales-status
+- belongs_to :shipping-fee-status
+- belongs_to :prefecture
+- belongs_to :schedule-delivery 
 
 ##addressesテーブル
 
 | Column             | Type       | Option                                  |
 | ------------------ | ---------- | --------------------------------------- |
 | postal-code        | text       | null: false                             |
-| prefecture         |            | null: false, foreign_key :true          |
-| city               | text       | null: false, foreign_key :true          |
+| prefecture         | integer    | null: false                             |
+| city               | text       | null: false                             |
 | addresses          | text       |
 | building           | text       |
 | phone-number       | text       |
@@ -53,3 +58,4 @@
 ###アソシエーション
 - belongs_to :user
 - belongs_to :item
+- belongs_to :prefecture
