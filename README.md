@@ -5,37 +5,34 @@
 | Column                | Type    | Option                              |
 | --------------------- | ------- | ----------------------------------- |
 | nickname              | string  | null: false                         |
-| email                 | string  | null: false, uniqueness: true       |
-| password              | string  | null: false                         |
-| password-confirmation | string  | null: false                         |
-| last-name             | string  | null: false                         |
-| first-name            | string  | null: false                         |
-| last-name-kana        | string  | null: false                         |
-| first-name-kana       | string  | null: false                         |
-| birth-date            | integer | null: false                         |
+| email                 | string  | null: false, unique: true           |
+| encrypted_password    | string  | null: false                         |
+| last_name             | string  | null: false                         |
+| first_name            | string  | null: false                         |
+| last_name_kana        | string  | null: false                         |
+| first_name_kana       | string  | null: false                         |
+| birth_date            | date    | null: false                         |
 
 ###アソシエーション
 - has_many :items
-- has_many :addresses
 - has_many :buys
+
 ##itemsテーブル
 
 | Column                     | Type       | Option                                  |
 | -------------------------- | ---------- | --------------------------------------- |
-| item-image                 | string     | null: false                             |
-| item-name                  | text       | null: false                             |
-| item-info                  | text       | null: false                             |
-| category-id                | integer    | null: false                             |
-| sales-status-id            | integer    | null: false                             |
-| shipping-fee-status-id     | integer    | null: false                             |
-| prefecture-id              | integer    | null: false                             |
-| scheduled-delivery-id      | integer    | null: false                             |
-| item-price                 | integer    | null: false                             |
-| user_id                    | references | null: false, foreign_key: true          |
+| item_name                  | string     | null: false                             |
+| item_info                  | text       | null: false                             |
+| category_id                | integer    | null: false                             |
+| sales_status_id            | integer    | null: false                             |
+| shipping_fee_status_id     | integer    | null: false                             |
+| prefecture_id              | integer    | null: false                             |
+| scheduled_delivery_id      | integer    | null: false                             |
+| item_price                 | integer    | null: false                             |
+| user                       | references | null: false, foreign_key: true          |
 
 ###アソシエーション
 - belongs_to :user
-- has_one :address
 - belongs_to :category
 - belongs_to :sales-status
 - belongs_to :shipping-fee-status
@@ -47,26 +44,25 @@
 
 | Column             | Type       | Option                                  |
 | ------------------ | ---------- | --------------------------------------- |
-| postal-code        | text       | null: false                             |
-| prefecture         | integer    | null: false                             |
-| city               | text       | null: false                             |
-| addresses          | text       |
-| building           | text       |
-| phone-number       | text       |
-| item_id            | references | null: false, foreign_key: true  
-| user_id            | references | null: false, foreign_key: true
+| postal_code        | string     | null: false                             |
+| prefecture_id      | integer    | null: false                             |
+| city               | string     | null: false                             |
+| addresses          | string     | null: false                             |
+| building           | string     |                                         |
+| phone_number       | string     | null: false                             |
 
 ###アソシエーション
-- belongs_to :user
-- belongs_to :item
 - belongs_to :prefecture
+- has_one :buy
 
 ##buysテーブル
 | Colum             | Type       | Option                                   |
 | ----------------- | ---------- | ---------------------------------------- |
-| user_id           | references | null: false, foreign_key: true           |
-| item_id           | references | null: false, foreign_key: true           |
+| user              | references | null: false, foreign_key: true           |
+| item              | references | null: false, foreign_key: true           |
+| address           | references | null: false, foreign_key: true           |
 
 ###アソシエーション
 - belongs_to :user
 - belongs_to :item
+- belongs_to :address
