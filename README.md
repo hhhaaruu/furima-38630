@@ -34,10 +34,10 @@
 ###アソシエーション
 - belongs_to :user
 - belongs_to :category
-- belongs_to :sales-status
-- belongs_to :shipping-fee-status
+- belongs_to :sales_status
+- belongs_to :shipping_fee_status
 - belongs_to :prefecture
-- belongs_to :schedule-delivery 
+- belongs_to :schedule_delivery 
 - has_one :buy
 
 ##addressesテーブル
@@ -50,19 +50,19 @@
 | addresses          | string     | null: false                             |
 | building           | string     |                                         |
 | phone_number       | string     | null: false                             |
+| buy                | references | null: false, foreign_key: true          |
 
 ###アソシエーション
 - belongs_to :prefecture
-- has_one :buy
+- belongs_to :buy
 
 ##buysテーブル
 | Colum             | Type       | Option                                   |
 | ----------------- | ---------- | ---------------------------------------- |
 | user              | references | null: false, foreign_key: true           |
 | item              | references | null: false, foreign_key: true           |
-| address           | references | null: false, foreign_key: true           |
 
 ###アソシエーション
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
