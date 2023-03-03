@@ -130,8 +130,8 @@
       <% if @items.exists? %>
        <% @items.each do |item| %>
        <li class='list'>
+        <%= link_to "#" do %>
         <div class="item-img-content">
-         <%= link_to "#" do %>
          <%= image_tag item.image, class: "item-img" %>
          <%# if %>
           <div class='sold-out'>
