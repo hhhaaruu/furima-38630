@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order("created_at DESC")
+    @buys = Buy.all
   end
 
   def new
@@ -23,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless (current_user.id == @item.user_id)
+    if  (@item.buy.present?) || !(current_user.id == @item.user_id) 
      redirect_to root_path
     end
   end
