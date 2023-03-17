@@ -9,7 +9,7 @@ class BuyAddress
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :address
-    validates :phone_number, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 999_9999_9999 }, format: { with: /\A[0-9]+\z/ }
+    validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }
   end
     validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
 

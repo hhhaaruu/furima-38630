@@ -54,10 +54,25 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Phone number is not a number")
       end
+      it '電話番号は９桁以下では保存出来ない' do
+        @buy_address.phone_number = '123456789'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+      end
+      it '電話番号は12桁以上では保存出来ない' do
+        @buy_address.phone_number = '123456789012'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
       it 'userと紐づいてなければ保存出来ないこと' do
         @buy_address.user_id = nil
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'tokenが空では保存出来ない' do
+        @buy_address.token = ''
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Token can't be blank")
       end
       it 'itemと紐づいてなければ保存出来ないこと' do
         @buy_address.item_id = nil
