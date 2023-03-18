@@ -13,9 +13,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path
+       redirect_to root_path
     else
-      render :new
+       render :new
     end
   end
 
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless (current_user.id == @item.user_id)
+    if  (@item.buy.present?) || !(current_user.id == @item.user_id) 
      redirect_to root_path
     end
   end
